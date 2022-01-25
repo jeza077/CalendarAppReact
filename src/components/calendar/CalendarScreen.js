@@ -4,10 +4,11 @@ import moment from 'moment';
 
 import { NavBar } from '../ui/NavBar';
 import { messages } from '../../helper/calendar-messages-es';
+import { CalendarEvent } from './CalendarEvent';
+import { CalendarModal } from './CalendarModal';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/locale/es'; //Importar idioma español de moment
-import { CalendarEvent } from './CalendarEvent';
 
 moment.locale('es'); //Idioma a español de los dias y meses en calendario por moment
 
@@ -78,6 +79,8 @@ export const CalendarScreen = () => {
                     event: CalendarEvent
                 }}
             />
+
+            <CalendarModal />
         </div>
     )
 }
