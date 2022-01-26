@@ -12,6 +12,7 @@ import { uiOpenModal } from '../../actions/ui';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/locale/es'; //Importar idioma español de moment
+import { eventSetActive } from '../../actions/events';
 
 moment.locale('es'); //Idioma a español de los dias y meses en calendario por moment
 
@@ -27,7 +28,7 @@ const events = [{
         id: '123',
         name: 'Jesus'
     }
-}]
+}];
 
 
 export const CalendarScreen = () => {
@@ -41,7 +42,7 @@ export const CalendarScreen = () => {
     }
 
     const onSelectEvent = (e) => {
-        console.log(e);
+        dispatch( eventSetActive(e) );
     }
     
     const onViewChange = (e) => {
