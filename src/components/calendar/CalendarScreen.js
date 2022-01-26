@@ -13,6 +13,7 @@ import { uiOpenModal } from '../../actions/ui';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/locale/es'; //Importar idioma español de moment
 import { eventSetActive } from '../../actions/events';
+import { AddNewFab } from '../ui/AddNewFab';
 
 moment.locale('es'); //Idioma a español de los dias y meses en calendario por moment
 
@@ -43,6 +44,7 @@ export const CalendarScreen = () => {
 
     const onSelectEvent = (e) => {
         dispatch( eventSetActive(e) );
+        dispatch( uiOpenModal() );
     }
     
     const onViewChange = (e) => {
@@ -85,6 +87,8 @@ export const CalendarScreen = () => {
                     event: CalendarEvent
                 }}
             />
+
+            <AddNewFab />
 
             <CalendarModal />
         </div>
