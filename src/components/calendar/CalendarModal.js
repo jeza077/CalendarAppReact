@@ -7,6 +7,7 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 
 import { uiCloseModal } from '../../actions/ui';
+import { eventAddNew } from '../../actions/events';
 
 
 
@@ -92,6 +93,16 @@ export const CalendarModal = () => {
         if( title.trim().length < 2 ){
             return setTitleValid(false);
         }
+
+        // Agregar evento
+        dispatch( eventAddNew({
+            ...formValues,
+            id: new Date().getTime(),
+            user: {
+                _id: '123',
+                name: 'Jesús'
+            }
+        }) );
 
         setTitleValid(true);
         closeModal();
