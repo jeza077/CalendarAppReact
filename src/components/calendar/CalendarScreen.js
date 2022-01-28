@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar'; //Bigcalendar usa moment
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
 import { NavBar } from '../ui/NavBar';
@@ -19,22 +19,11 @@ moment.locale('es'); //Idioma a español de los dias y meses en calendario por m
 
 const localizer = momentLocalizer(moment);
 
-const events = [{
-    title: 'Cumpleaños del jefe',
-    start: moment().toDate(),
-    end: moment().add( 2, 'hours' ).toDate(),
-    bgcolor: '#fafafa',
-    notes: 'Comprar pastel',
-    user: {
-        id: '123',
-        name: 'Jesus'
-    }
-}];
-
 
 export const CalendarScreen = () => {
 
     const dispatch = useDispatch();
+    const { events } = useSelector( state => state.calendar ); //Mostrar eventos en calendario
 
     const [lastView, setLastView] = useState( localStorage.getItem('lastView') || 'month' );
 
