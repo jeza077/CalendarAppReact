@@ -28,6 +28,13 @@ Modal.setAppElement('#root');
 const now = moment().minutes(0).seconds(0).add(1, 'hours');
 const nowPlus1 = now.clone().add(1, 'hours');
 
+const initEvent = {
+    title: '',
+    notes: '',
+    start: now.toDate(),
+    end: nowPlus1.toDate()
+}
+
 
 export const CalendarModal = () => {
 
@@ -38,12 +45,7 @@ export const CalendarModal = () => {
     const [dateEnd, setDateEnd] = useState( nowPlus1.toDate() );
     const [titleValid, setTitleValid] = useState(true);
 
-    const [formValues, setFormValues] = useState({
-        title: 'Evento',
-        notes: '',
-        start: now.toDate(),
-        end: nowPlus1.toDate()
-    });
+    const [formValues, setFormValues] = useState( initEvent );
 
     const { notes, title, start, end } = formValues;
 
@@ -59,6 +61,7 @@ export const CalendarModal = () => {
 
     const closeModal = () => {
         dispatch( uiCloseModal() );
+        setFormValues( initEvent );
     }
 
     const handleStartDateChange = (e) => {
