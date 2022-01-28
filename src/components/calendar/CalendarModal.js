@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from 'react-modal';
@@ -7,7 +7,7 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew } from '../../actions/events';
+import { eventAddNew, eventClearActiveEvent } from '../../actions/events';
 
 
 
@@ -39,6 +39,7 @@ const initEvent = {
 export const CalendarModal = () => {
 
     const { modalOpen } = useSelector( state => state.ui );
+    const { activeEvent } = useSelector( state => state.calendar );
     const dispatch = useDispatch();
 
     const [dateStart, setDateStart] = useState( now.toDate() );
@@ -49,6 +50,14 @@ export const CalendarModal = () => {
 
     const { notes, title, start, end } = formValues;
 
+
+    useEffect(() => {
+        if( activeEvent ){
+            setFormValues( activeEvent );
+        }
+    }, [activeEvent, setFormValues]);
+    
+
     const handleInputChange = ({ target }) => {
 
         setFormValues({
@@ -58,9 +67,9 @@ export const CalendarModal = () => {
 
     }
 
-
     const closeModal = () => {
         dispatch( uiCloseModal() );
+        dispatch( eventClearActiveEvent() );
         setFormValues( initEvent );
     }
 
