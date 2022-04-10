@@ -58,8 +58,8 @@ export const eventStartLoading = () => {
             const body = await resp.json();
 
             const events = prepareEvents(body.eventos); //prepareEvents, convertir a String la fecha de inicio y final del evento
-            console.log(events);
-            // dispatch( eventLoaded(events) );
+            // console.log(events);
+            dispatch( eventLoaded(events) );
             
         } catch (e) {
             console.log(e);
