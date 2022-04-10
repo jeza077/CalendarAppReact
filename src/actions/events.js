@@ -1,4 +1,5 @@
 import { fetchConToken } from "../helper/fetch";
+import { prepareEvents } from "../helper/prepareEvents";
 import { types } from "../types/types";
 
 
@@ -56,9 +57,9 @@ export const eventStartLoading = () => {
             const resp = await fetchConToken( 'events' );
             const body = await resp.json();
 
-            const events = body.eventos;
+            const events = prepareEvents(body.eventos); //prepareEvents, convertir a String la fecha de inicio y final del evento
             console.log(events);
-            // dispatch( eventLoaded( [] ) );
+            // dispatch( eventLoaded(events) );
             
         } catch (e) {
             console.log(e);
